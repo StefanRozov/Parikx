@@ -1,0 +1,7 @@
+[
+  { "model": "bookings.bookingstatus", "pk": 1, "fields": { "name": "Записан" } },
+  { "model": "bookings.bookingstatus", "pk": 2, "fields": { "name": "Подтверждён" } },
+  { "model": "bookings.bookingstatus", "pk": 3, "fields": { "name": "Выполнено" } },
+  { "model": "bookings.bookingstatus", "pk": 4, "fields": { "name": "Отменён" } },
+  { "model": "bookings.bookingstatus", "pk": 5, "fields": { "name": "Неявка" } }
+]

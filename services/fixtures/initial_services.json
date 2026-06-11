@@ -1,0 +1,46 @@
+[
+  { "model": "services.servicecategory", "pk": 1, "fields": { "name": "Стрижки" } },
+  { "model": "services.servicecategory", "pk": 2, "fields": { "name": "Окрашивание" } },
+  { "model": "services.servicecategory", "pk": 3, "fields": { "name": "Укладки" } },
+  { "model": "services.servicecategory", "pk": 4, "fields": { "name": "Уход" } },
+  {
+    "model": "services.service",
+    "pk": 1,
+    "fields": { "category": 1, "name": "Женская стрижка", "price": "1500.00", "duration": 60, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 2,
+    "fields": { "category": 1, "name": "Мужская стрижка", "price": "800.00", "duration": 30, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 3,
+    "fields": { "category": 1, "name": "Детская стрижка", "price": "600.00", "duration": 30, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 4,
+    "fields": { "category": 2, "name": "Окрашивание в один тон", "price": "3500.00", "duration": 120, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 5,
+    "fields": { "category": 2, "name": "Мелирование", "price": "4500.00", "duration": 150, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 6,
+    "fields": { "category": 3, "name": "Укладка феном", "price": "1200.00", "duration": 45, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 7,
+    "fields": { "category": 3, "name": "Вечерняя укладка", "price": "2000.00", "duration": 60, "is_active": true }
+  },
+  {
+    "model": "services.service",
+    "pk": 8,
+    "fields": { "category": 4, "name": "Маска для волос", "price": "900.00", "duration": 30, "is_active": true }
+  }
+]

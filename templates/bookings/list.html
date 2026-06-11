@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Мои записи</h2>
+
+{% if bookings %}
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Услуга</th>
+                <th>Мастер</th>
+                <th>Дата и время</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.service.name }}</td>
+                <td>{{ booking.master.get_full_name|default:booking.master.username }}</td>
+                <td>{{ booking.date|date:"d.m.Y H:i" }}</td>
+                <td>
+                    <span class="badge
+                        {% if booking.status.name == 'Выполнено' %}bg-success
+                        {% elif booking.status.name == 'Отменён' or booking.status.name == 'Неявка' %}bg-danger
+                        {% elif booking.status.name == 'Подтверждён' %}bg-primary
+                        {% else %}bg-warning text-dark{% endif %}">
+                        {{ booking.status.name }}
+                    </span>
+                </td>
+                <td>
+                    {% if booking.status.name == 'Записан' or booking.status.name == 'Подтверждён' %}
+                    <a href="{% url 'booking_cancel' booking.id %}" class="btn btn-sm btn-outline-danger"
+                       onclick="return confirm('Отменить запись?')">Отменить</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    У вас пока нет записей.
+    <a href="{% url 'services_list' %}">Выберите услугу</a> и запишитесь онлайн.
+</div>
+{% endif %}
+{% endblock %}

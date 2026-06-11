@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Записи мастера</h2>
+
+{% if bookings %}
+<div class="table-responsive">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Клиент</th>
+                <th>Услуга</th>
+                <th>Дата и время</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.client.get_full_name|default:booking.client.username }}</td>
+                <td>{{ booking.service.name }}</td>
+                <td>{{ booking.date|date:"d.m.Y H:i" }}</td>
+                <td>
+                    <span class="badge
+                        {% if booking.status.name == 'Выполнено' %}bg-success
+                        {% elif booking.status.name == 'Отменён' or booking.status.name == 'Неявка' %}bg-danger
+                        {% elif booking.status.name == 'Подтверждён' %}bg-primary
+                        {% else %}bg-warning text-dark{% endif %}">
+                        {{ booking.status.name }}
+                    </span>
+                </td>
+                <td>
+                    {% if booking.status.name == 'Записан' or booking.status.name == 'Подтверждён' %}
+                    <a href="{% url 'master_update_status' booking.id %}" class="btn btn-sm btn-outline-primary">
+                        Изменить статус
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">У вас пока нет записей.</div>
+{% endif %}
+{% endblock %}

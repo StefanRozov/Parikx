@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'services_list' %}">Услуги</a></li>
+        <li class="breadcrumb-item active">Запись</li>
+    </ol>
+</nav>
+
+<h2 class="mb-4">Запись на услугу</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5>{{ service.name }}</h5>
+        <p class="mb-0 text-muted">{{ service.category.name }} · {{ service.duration }} мин. · {{ service.price }} ₽</p>
+    </div>
+</div>
+
+<form method="post" class="col-md-6">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <div class="mb-3">
+        <label class="form-label">{{ form.master.label }}</label>
+        {{ form.master }}
+        {% if form.master.errors %}<div class="text-danger">{{ form.master.errors }}</div>{% endif %}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">{{ form.date.label }}</label>
+        {{ form.date }}
+        {% if form.date.errors %}<div class="text-danger">{{ form.date.errors }}</div>{% endif %}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">{{ form.time.label }}</label>
+        {{ form.time }}
+        {% if form.time.errors %}<div class="text-danger">{{ form.time.errors }}</div>{% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Подтвердить запись</button>
+    <a href="{% url 'services_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Добро пожаловать в нашу парикмахерскую</h1>
+        <p class="col-md-8 fs-4">
+            Стрижки, окрашивание, укладки и уход за волосами.
+            Запишитесь онлайн — быстро и удобно.
+        </p>
+        <a class="btn btn-primary btn-lg" href="{% url 'services_list' %}">Записаться на услугу</a>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Опытные мастера</h5>
+                <p class="card-text">Профессиональные парикмахеры с многолетним стажем.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Качественные материалы</h5>
+                <p class="card-text">Используем только проверенную профессиональную косметику.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Онлайн-запись</h5>
+                <p class="card-text">Выберите услугу, мастера и удобное время прямо на сайте.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if services %}
+<h2 class="mb-4">Популярные услуги</h2>
+<div class="row g-4 mb-5">
+    {% for service in services %}
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">{{ service.category.name }}</span>
+                <h5 class="card-title">{{ service.name }}</h5>
+                <p class="card-text text-muted">{{ service.duration }} мин.</p>
+                <p class="card-text fw-bold">{{ service.price }} ₽</p>
+                <a href="{% url 'booking_create' service.id %}" class="btn btn-outline-primary">Записаться</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if masters %}
+<h2 class="mb-4">Наши мастера</h2>
+<div class="row g-3">
+    {% for master in masters %}
+    <div class="col-md-3">
+        <div class="card text-center">
+            <div class="card-body">
+                <h6 class="card-title">{{ master.get_full_name|default:master.username }}</h6>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

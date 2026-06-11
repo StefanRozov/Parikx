@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Подтверждение почты</h2>
+<p class="text-muted">Введите 6-значный код, который пришёл на вашу почту.</p>
+
+{% if dev_code %}
+<div class="alert alert-info">
+    <strong>Режим разработки:</strong> код подтверждения — <code>{{ dev_code }}</code>
+    (в продакшене он приходит только на email).
+</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="code" class="form-control" placeholder="Введите код из письма" maxlength="6" required>
+    <button type="submit" class="btn btn-success mt-3">Подтвердить</button>
+</form>
+{% endblock %}

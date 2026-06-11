@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Изменение статуса записи</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <p><strong>Клиент:</strong> {{ booking.client.get_full_name|default:booking.client.username }}</p>
+        <p><strong>Услуга:</strong> {{ booking.service.name }}</p>
+        <p><strong>Дата:</strong> {{ booking.date|date:"d.m.Y H:i" }}</p>
+        <p><strong>Текущий статус:</strong> {{ booking.status.name }}</p>
+    </div>
+</div>
+
+<form method="post" class="col-md-4">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">{{ form.status.label }}</label>
+        {{ form.status }}
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'master_dashboard' %}" class="btn btn-secondary">Назад</a>
+</form>
+{% endblock %}
